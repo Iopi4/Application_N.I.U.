@@ -5,15 +5,133 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".MainActivity">
 
+    <!-- Аватар -->
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/size_icon"
+        android:layout_height="@dimen/size_icon"
+        android:contentDescription="@string/description_post_author_avatar"
+        app:layout_constraintBottom_toTopOf="@+id/barrier_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/netology" />
+    <!-- Автор -->
     <TextView
+        android:id="@+id/author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:singleLine="true"
+        tools:text="@sample/posts.json/data/author"
+        app:layout_constraintBottom_toTopOf="@+id/published"
+        app:layout_constraintEnd_toStartOf="@+id/menu"
+        app:layout_constraintStart_toEndOf="@+id/avatar"
+        app:layout_constraintTop_toTopOf="@+id/avatar"
+        app:layout_constraintVertical_chainStyle="packed" />
+    <!-- Дата публикации -->
+    <TextView
+        android:id="@+id/published"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nmedia"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        tools:text="@sample/posts.json/data/published"
+        app:layout_constraintBottom_toBottomOf="@+id/avatar"
+        app:layout_constraintStart_toEndOf="@+id/avatar"
+        app:layout_constraintTop_toBottomOf="@+id/author" />
+    <!-- Кнопка меню -->
+    <ImageButton
+        android:id="@+id/menu"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_post_menu"
+        android:src="@drawable/ic_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!-- Барьер -->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="avatar,published,menu"
+        app:barrierDirection="bottom" />
+    <!-- Пост -->
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/barrier_header"
+        tools:text="@sample/posts.json/data/content" />
+
+    <!-- 1. Иконка "Сердце" (Лайк) -->
+    <ImageView
+        android:id="@+id/icon_like"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/description_like"
+        android:src="@drawable/ic_like"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <!-- 2. Текст количества лайков -->
+    <TextView
+        android:id="@+id/count_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_like"
+        app:layout_constraintStart_toEndOf="@+id/icon_like"
+        app:layout_constraintTop_toTopOf="@+id/icon_like"
+        tools:text="1000" />
+
+    <!-- 3. Иконка "Поделиться" (Репост) -->
+    <ImageView
+        android:id="@+id/icon_share"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/description_share"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_like"
+        app:layout_constraintStart_toEndOf="@+id/count_like"
+        app:layout_constraintTop_toTopOf="@+id/icon_like" />
+
+    <!-- 4. Текст количества репостов -->
+    <TextView
+        android:id="@+id/count_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_share"
+        app:layout_constraintStart_toEndOf="@+id/icon_share"
+        app:layout_constraintTop_toTopOf="@+id/icon_share"
+        tools:text="5000" />
+
+    <!-- 5. Иконка "Глаз" (Просмотры) -->
+    <ImageView
+        android:id="@+id/icon_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:contentDescription="@string/description_view"
+        android:src="@drawable/ic_view"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_like"
+        app:layout_constraintEnd_toStartOf="@+id/count_view"
+        app:layout_constraintTop_toTopOf="@+id/icon_like" />
+
+    <!-- 6. Текст количества просмотров -->
+    <TextView
+        android:id="@+id/count_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/icon_view"
+        tools:text="5000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
